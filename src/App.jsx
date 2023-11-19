@@ -1,17 +1,5 @@
 import React, { useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  LayersControl,
-  Circle,
-  LayerGroup,
-  Polygon,
-  Polyline,
-  Tooltip,
-  GeoJSON,
-} from "react-leaflet";
+import { MapContainer, TileLayer, LayersControl, GeoJSON } from "react-leaflet";
 import "./App.css";
 import "./reset.css";
 import { Icon } from "leaflet";
