@@ -27,6 +27,14 @@ export default function App() {
     fillOpacity: 0.8,
   };
 
+  const batasKecStyle = {
+    fillColor: "grey",
+    color: "blue",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.4,
+  };
+
   const onEachCity = (city, layer) => {
     const cityName = city.properties.WADMKK;
 
@@ -66,7 +74,7 @@ export default function App() {
           fillColor: "blue",
           weight: 1,
           opacity: 1,
-          fillOpacity: 0.2,
+          fillOpacity: 0.1,
         });
       },
       click: (e) => {
@@ -74,11 +82,11 @@ export default function App() {
           fillColor: "blue",
           weight: 1,
           opacity: 1,
-          fillOpacity: 0.5,
+          fillOpacity: 0.3,
         });
       },
       mouseout: (e) => {
-        e.target.setStyle(batasDKIStyle);
+        e.target.setStyle(batasKecStyle);
         layer.closePopup();
       },
     });
@@ -90,20 +98,20 @@ export default function App() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <LayersControl position="topright">
-        <LayersControl.Overlay name="Area Rawan Banjir">
+        <LayersControl.Overlay checked name="Area Rawan Banjir">
           <GeoJSON data={clip} zIndex={2} style={banjirStyle}></GeoJSON>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Jakarta Utara">
+        <LayersControl.Overlay checked name="Jakarta Utara">
           <GeoJSON
             data={jakut}
             zIndex={1}
-            style={batasDKIStyle}
+            style={batasKecStyle}
             onEachFeature={onEachKec}
           ></GeoJSON>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="DKI Jakarta">
+        <LayersControl.Overlay name="DKI Jakarta">
           <GeoJSON
             data={batasDKI}
             zIndex={0}
