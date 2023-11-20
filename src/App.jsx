@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, LayersControl, GeoJSON } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  LayersControl,
+  GeoJSON,
+  Marker,
+} from "react-leaflet";
 import "./App.css";
 import "./reset.css";
 import { Icon } from "leaflet";
@@ -100,11 +106,14 @@ export default function App() {
   };
   return (
     <MapContainer center={center} zoom={12} scrollWheelZoom={true}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
       <LayersControl position="topright">
+        <LayersControl.Overlay checked name="OpenStreetMap">
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
+        </LayersControl.Overlay>
+
         <LayersControl.Overlay name="Area Rawan Banjir">
           <GeoJSON data={clip} zIndex={2} style={banjirStyle}></GeoJSON>
         </LayersControl.Overlay>
