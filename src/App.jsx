@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import L from "leaflet";
 import {
   MapContainer,
   TileLayer,
@@ -118,10 +119,10 @@ export default function App() {
           <GeoJSON data={clip} zIndex={2} style={banjirStyle}></GeoJSON>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Jakarta Utara">
+        <LayersControl.Overlay checked name="Jakarta Utara">
           <GeoJSON
             data={jakut}
-            zIndex={1}
+            zIndex={200}
             style={batasKecStyle}
             onEachFeature={onEachKec}
           ></GeoJSON>
@@ -130,24 +131,50 @@ export default function App() {
         <LayersControl.Overlay name="DKI Jakarta">
           <GeoJSON
             data={batasDKI}
-            zIndex={0}
+            zIndex={-10}
             style={batasDKIStyle}
             onEachFeature={onEachCity}
           ></GeoJSON>
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Pemerintahan">
-          <GeoJSON data={pemerintahan} onEachFeature={onEachPoint}></GeoJSON>
+          <GeoJSON
+            data={pemerintahan}
+            zIndex={100}
+            onEachFeature={onEachPoint}
+            pointToLayer={(point, latlng) => {
+              return L.circleMarker(latlng, {
+                radius: 3,
+              });
+            }}
+            style={{ color: "green" }}
+          ></GeoJSON>
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Pendidikan">
-          <GeoJSON data={pendidikan} onEachFeature={onEachPoint}></GeoJSON>
+          <GeoJSON
+            data={pendidikan}
+            zIndex={100}
+            onEachFeature={onEachPoint}
+            pointToLayer={(point, latlng) => {
+              return L.circleMarker(latlng, {
+                radius: 3,
+              });
+            }}
+            style={{ color: "blue" }}
+          ></GeoJSON>
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Rumah Sakit">
           <GeoJSON
             data={rumahsakit}
+            zIndex={100}
             onEachFeature={onEachPoint}
+            pointToLayer={(point, latlng) => {
+              return L.circleMarker(latlng, {
+                radius: 3,
+              });
+            }}
             style={{ color: "red" }}
           ></GeoJSON>
         </LayersControl.Overlay>
