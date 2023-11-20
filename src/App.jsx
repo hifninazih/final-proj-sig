@@ -19,7 +19,7 @@ import * as pemerintahan from "./fitur/PemerintahanGeoJSON.json";
 import * as rumahsakit from "./fitur/RumahSakitGeoJSON.json";
 
 export default function App() {
-  const center = [-6.142602896107601, 106.83071136474611];
+  const center = [-6.221551441519991, 106.832041015625];
 
   const batasDKIStyle = {
     fillColor: "red",
@@ -66,6 +66,7 @@ export default function App() {
           opacity: 1,
           fillOpacity: 0.5,
         });
+        console.log(e);
       },
       mouseout: (e) => {
         e.target.setStyle(batasDKIStyle);
@@ -116,22 +117,20 @@ export default function App() {
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Area Rawan Banjir">
-          <GeoJSON data={clip} zIndex={2} style={banjirStyle}></GeoJSON>
+          <GeoJSON data={clip} style={banjirStyle}></GeoJSON>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="Jakarta Utara">
+        <LayersControl.Overlay name="Jakarta Utara">
           <GeoJSON
             data={jakut}
-            zIndex={200}
             style={batasKecStyle}
             onEachFeature={onEachKec}
           ></GeoJSON>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="DKI Jakarta">
+        <LayersControl.Overlay checked name="DKI Jakarta">
           <GeoJSON
             data={batasDKI}
-            zIndex={-10}
             style={batasDKIStyle}
             onEachFeature={onEachCity}
           ></GeoJSON>
@@ -140,7 +139,6 @@ export default function App() {
         <LayersControl.Overlay name="Pemerintahan">
           <GeoJSON
             data={pemerintahan}
-            zIndex={100}
             onEachFeature={onEachPoint}
             pointToLayer={(point, latlng) => {
               return L.circleMarker(latlng, {
@@ -154,7 +152,6 @@ export default function App() {
         <LayersControl.Overlay name="Pendidikan">
           <GeoJSON
             data={pendidikan}
-            zIndex={100}
             onEachFeature={onEachPoint}
             pointToLayer={(point, latlng) => {
               return L.circleMarker(latlng, {
@@ -168,7 +165,6 @@ export default function App() {
         <LayersControl.Overlay name="Rumah Sakit">
           <GeoJSON
             data={rumahsakit}
-            zIndex={100}
             onEachFeature={onEachPoint}
             pointToLayer={(point, latlng) => {
               return L.circleMarker(latlng, {
