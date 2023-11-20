@@ -4,9 +4,12 @@ import "./App.css";
 import "./reset.css";
 import { Icon } from "leaflet";
 import * as batasDKI from "./fitur/Batas_DKI_GeoJSON.json";
-import * as banjir from "./fitur/banjirjakartaGeoJSON.json";
 import * as clip from "./fitur/ClipJakutGeoJSON.json";
 import * as jakut from "./fitur/JakartaUtaraGeoJSON.json";
+
+import * as pendidikan from "./fitur/PendidikanGeoJSON.json";
+import * as pemerintahan from "./fitur/PemerintahanGeoJSON.json";
+import * as rumahsakit from "./fitur/RumahSakitGeoJSON.json";
 
 export default function App() {
   const center = [-6.142602896107601, 106.83071136474611];
@@ -91,6 +94,10 @@ export default function App() {
       },
     });
   };
+
+  const onEachPoint = (point, layer) => {
+    layer.bindPopup(`${point.properties.NAMOBJ}`);
+  };
   return (
     <MapContainer center={center} zoom={12} scrollWheelZoom={true}>
       <TileLayer
@@ -98,11 +105,11 @@ export default function App() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <LayersControl position="topright">
-        <LayersControl.Overlay checked name="Area Rawan Banjir">
+        <LayersControl.Overlay name="Area Rawan Banjir">
           <GeoJSON data={clip} zIndex={2} style={banjirStyle}></GeoJSON>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="Jakarta Utara">
+        <LayersControl.Overlay name="Jakarta Utara">
           <GeoJSON
             data={jakut}
             zIndex={1}
@@ -117,6 +124,22 @@ export default function App() {
             zIndex={0}
             style={batasDKIStyle}
             onEachFeature={onEachCity}
+          ></GeoJSON>
+        </LayersControl.Overlay>
+
+        <LayersControl.Overlay name="Pemerintahan">
+          <GeoJSON data={pemerintahan} onEachFeature={onEachPoint}></GeoJSON>
+        </LayersControl.Overlay>
+
+        <LayersControl.Overlay name="Pendidikan">
+          <GeoJSON data={pendidikan} onEachFeature={onEachPoint}></GeoJSON>
+        </LayersControl.Overlay>
+
+        <LayersControl.Overlay name="Rumah Sakit">
+          <GeoJSON
+            data={rumahsakit}
+            onEachFeature={onEachPoint}
+            style={{ color: "red" }}
           ></GeoJSON>
         </LayersControl.Overlay>
       </LayersControl>
