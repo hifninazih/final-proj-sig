@@ -142,7 +142,7 @@ export default function App() {
             onEachFeature={onEachPoint}
             pointToLayer={(point, latlng) => {
               return L.circleMarker(latlng, {
-                radius: 3,
+                radius: 5,
               });
             }}
             style={{ color: "green" }}
@@ -155,7 +155,7 @@ export default function App() {
             onEachFeature={onEachPoint}
             pointToLayer={(point, latlng) => {
               return L.circleMarker(latlng, {
-                radius: 3,
+                radius: 5,
               });
             }}
             style={{ color: "blue" }}
@@ -168,7 +168,7 @@ export default function App() {
             onEachFeature={onEachPoint}
             pointToLayer={(point, latlng) => {
               return L.circleMarker(latlng, {
-                radius: 3,
+                radius: 5,
               });
             }}
             style={{ color: "red" }}
