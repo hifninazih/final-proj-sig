@@ -26,29 +26,25 @@ export default function App() {
 
   var LeafIcon = L.Icon.extend({
     options: {
-      iconSize: [95, 95],
-      shadowSize: [50, 64],
-      iconAnchor: [22, 94],
-      shadowAnchor: [4, 62],
-      popupAnchor: [-3, -76],
+      iconSize: [20, 30],
+      iconAnchor: [10, 30],
+      popupAnchor: [0, -20],
     },
   });
 
   var redIcon = new LeafIcon({
-    iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-red.png",
-    shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+    iconUrl:
+      "https://raw.githubusercontent.com/hifninazih/final-proj-sig/main/src/assets/icon-marker/merah.png",
   });
 
-  var greenIcon = new LeafIcon({
-    iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-green.png",
-    shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  var blueIcon = new LeafIcon({
+    iconUrl:
+      "https://raw.githubusercontent.com/hifninazih/final-proj-sig/main/src/assets/icon-marker/biru.png",
   });
 
   var orangeIcon = new LeafIcon({
-    // iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
     iconUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/8/88/Map_marker.svg",
-    // shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+      "https://raw.githubusercontent.com/hifninazih/final-proj-sig/main/src/assets/icon-marker/oren.png",
   });
 
   const batasDKIStyle = {
@@ -194,7 +190,7 @@ export default function App() {
               onEachFeature={onEachPoint}
               pointToLayer={(point, latlng) => {
                 return L.marker(latlng, {
-                  icon: greenIcon,
+                  icon: blueIcon,
                 });
               }}
               style={{ color: "blue" }}
@@ -202,7 +198,7 @@ export default function App() {
           </Pane>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Rumah Sakit">
+        <LayersControl.Overlay checked name="Rumah Sakit">
           <Pane name="Rumah Sakit" style={{ zIndex: 601 }}>
             <GeoJSON
               data={rumahsakit}
