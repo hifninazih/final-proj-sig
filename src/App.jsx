@@ -19,12 +19,14 @@ import * as pendidikan from "./fitur/PendidikanGeoJSON.json";
 import * as pemerintahan from "./fitur/PemerintahanGeoJSON.json";
 import * as rumahsakit from "./fitur/RumahSakitGeoJSON.json";
 
+import * as birumarker from "./assets/icon-marker/biru.png";
+
 export default function App() {
   const center = [-6.221551441519991, 106.832041015625];
 
   var LeafIcon = L.Icon.extend({
     options: {
-      iconSize: [38, 95],
+      iconSize: [95, 95],
       shadowSize: [50, 64],
       iconAnchor: [22, 94],
       shadowAnchor: [4, 62],
@@ -43,8 +45,10 @@ export default function App() {
   });
 
   var orangeIcon = new LeafIcon({
-    iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
-    shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+    // iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
+    iconUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/8/88/Map_marker.svg",
+    // shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
   });
 
   const batasDKIStyle = {
@@ -168,7 +172,7 @@ export default function App() {
           </Pane>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Pemerintahan">
+        <LayersControl.Overlay checked name="Pemerintahan">
           <Pane name="Pemerintahan" style={{ zIndex: 601 }}>
             <GeoJSON
               data={pemerintahan}
