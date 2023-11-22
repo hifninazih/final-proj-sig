@@ -6,6 +6,7 @@ import {
   LayersControl,
   GeoJSON,
   Marker,
+  Pane,
 } from "react-leaflet";
 import "./App.css";
 import "./reset.css";
@@ -20,6 +21,31 @@ import * as rumahsakit from "./fitur/RumahSakitGeoJSON.json";
 
 export default function App() {
   const center = [-6.221551441519991, 106.832041015625];
+
+  var LeafIcon = L.Icon.extend({
+    options: {
+      iconSize: [38, 95],
+      shadowSize: [50, 64],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76],
+    },
+  });
+
+  var redIcon = new LeafIcon({
+    iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-red.png",
+    shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  });
+
+  var greenIcon = new LeafIcon({
+    iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+    shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  });
+
+  var orangeIcon = new LeafIcon({
+    iconUrl: "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
+    shadowUrl: "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  });
 
   const batasDKIStyle = {
     fillColor: "red",
@@ -116,63 +142,75 @@ export default function App() {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Area Rawan Banjir">
-          <GeoJSON data={clip} style={banjirStyle}></GeoJSON>
+        <LayersControl.Overlay checked name="Area Rawan Banjir">
+          <Pane name="Area Rawan Banjir" style={{ zIndex: 203 }}>
+            <GeoJSON data={clip} style={banjirStyle}></GeoJSON>
+          </Pane>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Jakarta Utara">
-          <GeoJSON
-            data={jakut}
-            style={batasKecStyle}
-            onEachFeature={onEachKec}
-          ></GeoJSON>
+        <LayersControl.Overlay checked name="Jakarta Utara">
+          <Pane name="Jakarta Utara" style={{ zIndex: 202 }}>
+            <GeoJSON
+              data={jakut}
+              style={batasKecStyle}
+              onEachFeature={onEachKec}
+            ></GeoJSON>
+          </Pane>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="DKI Jakarta">
-          <GeoJSON
-            data={batasDKI}
-            style={batasDKIStyle}
-            onEachFeature={onEachCity}
-          ></GeoJSON>
+        <LayersControl.Overlay name="DKI Jakarta">
+          <Pane name="DKI Jakarta" style={{ zIndex: 201 }}>
+            <GeoJSON
+              data={batasDKI}
+              style={batasDKIStyle}
+              onEachFeature={onEachCity}
+            ></GeoJSON>
+          </Pane>
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Pemerintahan">
-          <GeoJSON
-            data={pemerintahan}
-            onEachFeature={onEachPoint}
-            pointToLayer={(point, latlng) => {
-              return L.circleMarker(latlng, {
-                radius: 5,
-              });
-            }}
-            style={{ color: "green" }}
-          ></GeoJSON>
+          <Pane name="Pemerintahan" style={{ zIndex: 601 }}>
+            <GeoJSON
+              data={pemerintahan}
+              onEachFeature={onEachPoint}
+              pointToLayer={(point, latlng) => {
+                return L.marker(latlng, {
+                  icon: orangeIcon,
+                });
+              }}
+              style={{ color: "green" }}
+            ></GeoJSON>
+          </Pane>
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Pendidikan">
-          <GeoJSON
-            data={pendidikan}
-            onEachFeature={onEachPoint}
-            pointToLayer={(point, latlng) => {
-              return L.circleMarker(latlng, {
-                radius: 5,
-              });
-            }}
-            style={{ color: "blue" }}
-          ></GeoJSON>
+          <Pane name="Pendidikan" style={{ zIndex: 601 }}>
+            <GeoJSON
+              data={pendidikan}
+              onEachFeature={onEachPoint}
+              pointToLayer={(point, latlng) => {
+                return L.marker(latlng, {
+                  icon: greenIcon,
+                });
+              }}
+              style={{ color: "blue" }}
+            ></GeoJSON>
+          </Pane>
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Rumah Sakit">
-          <GeoJSON
-            data={rumahsakit}
-            onEachFeature={onEachPoint}
-            pointToLayer={(point, latlng) => {
-              return L.circleMarker(latlng, {
-                radius: 5,
-              });
-            }}
-            style={{ color: "red" }}
-          ></GeoJSON>
+          <Pane name="Rumah Sakit" style={{ zIndex: 601 }}>
+            <GeoJSON
+              data={rumahsakit}
+              onEachFeature={onEachPoint}
+              pointToLayer={(point, latlng) => {
+                return L.marker(latlng, {
+                  icon: redIcon,
+                });
+              }}
+              style={{ color: "red" }}
+            ></GeoJSON>
+          </Pane>
         </LayersControl.Overlay>
       </LayersControl>
     </MapContainer>
