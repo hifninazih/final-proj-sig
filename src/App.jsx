@@ -6,20 +6,25 @@ import {
   LayersControl,
   GeoJSON,
   Marker,
+  LayerGroup,
   Pane,
 } from "react-leaflet";
+
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
 import "./App.css";
 import "./reset.css";
 import { Icon } from "leaflet";
+
 import * as batasDKI from "./fitur/Batas_DKI_GeoJSON.json";
-import * as clip from "./fitur/ClipJakutGeoJSON.json";
+import * as clip from "./fitur/BanjirJakutGeoJSON.json";
 import * as jakut from "./fitur/JakartaUtaraGeoJSON.json";
 
 import * as pendidikan from "./fitur/PendidikanGeoJSON.json";
 import * as pemerintahan from "./fitur/PemerintahanGeoJSON.json";
 import * as rumahsakit from "./fitur/RumahSakitGeoJSON.json";
-
-import * as birumarker from "./assets/icon-marker/biru.png";
 
 export default function App() {
   const center = [-6.221551441519991, 106.832041015625];
@@ -132,6 +137,7 @@ export default function App() {
   const onEachPoint = (point, layer) => {
     layer.bindPopup(`${point.properties.NAMOBJ}`);
   };
+
   return (
     <MapContainer center={center} zoom={12} scrollWheelZoom={true}>
       <LayersControl position="topright">
@@ -158,7 +164,7 @@ export default function App() {
           </Pane>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="DKI Jakarta">
+        <LayersControl.Overlay checked name="DKI Jakarta">
           <Pane name="DKI Jakarta" style={{ zIndex: 201 }}>
             <GeoJSON
               data={batasDKI}
@@ -184,18 +190,20 @@ export default function App() {
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Pendidikan">
-          <Pane name="Pendidikan" style={{ zIndex: 601 }}>
-            <GeoJSON
-              data={pendidikan}
-              onEachFeature={onEachPoint}
-              pointToLayer={(point, latlng) => {
-                return L.marker(latlng, {
-                  icon: blueIcon,
-                });
-              }}
-              style={{ color: "blue" }}
-            ></GeoJSON>
-          </Pane>
+          <LayerGroup>
+            <Pane name="Pendidikan" style={{ zIndex: 601 }}>
+              <GeoJSON
+                data={pendidikan}
+                onEachFeature={onEachPoint}
+                pointToLayer={(point, latlng) => {
+                  return L.marker(latlng, {
+                    icon: blueIcon,
+                  });
+                }}
+                style={{ color: "blue" }}
+              ></GeoJSON>
+            </Pane>
+          </LayerGroup>
         </LayersControl.Overlay>
 
         <LayersControl.Overlay checked name="Rumah Sakit">
