@@ -5,7 +5,7 @@ import {
   TileLayer,
   LayersControl,
   GeoJSON,
-  Marker,
+  ImageOverlay,
   LayerGroup,
   Pane,
 } from "react-leaflet";
@@ -218,6 +218,19 @@ export default function App() {
               }}
               style={{ color: "red" }}
             ></GeoJSON>
+          </Pane>
+        </LayersControl.Overlay>
+
+        <LayersControl.Overlay name="DEMNAS">
+          <Pane name="DEMNAS" style={{ zIndex: 200 }}>
+            <ImageOverlay
+              url={"./fitur/DEMNAS.png"}
+              bounds={[
+                [-6.25, 106.5],
+                [-6, 107],
+              ]}
+              opacity={0.8}
+            ></ImageOverlay>
           </Pane>
         </LayersControl.Overlay>
       </LayersControl>

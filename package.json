@@ -2,6 +2,7 @@
   "name": "sig",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://hifninazih.site/sig",
   "type": "module",
   "scripts": {
     "dev": "vite",
