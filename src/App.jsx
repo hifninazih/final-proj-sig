@@ -148,19 +148,18 @@ export default function App() {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="Area Rawan Banjir">
-          <Pane name="Area Rawan Banjir" style={{ zIndex: 203 }}>
-            <GeoJSON data={clip} style={banjirStyle}></GeoJSON>
-          </Pane>
-        </LayersControl.Overlay>
-
-        <LayersControl.Overlay checked name="Jakarta Utara">
-          <Pane name="Jakarta Utara" style={{ zIndex: 202 }}>
-            <GeoJSON
-              data={jakut}
-              style={batasKecStyle}
-              onEachFeature={onEachKec}
-            ></GeoJSON>
+        <LayersControl.Overlay name="DEMNAS">
+          <Pane name="DEMNAS" style={{ zIndex: 200 }}>
+            <ImageOverlay
+              url={
+                "https://raw.githubusercontent.com/hifninazih/final-proj-sig/main/src/fitur/DEMNAS.jpg"
+              }
+              bounds={[
+                [-6.25, 106.5],
+                [-6, 107],
+              ]}
+              opacity={0.9}
+            ></ImageOverlay>
           </Pane>
         </LayersControl.Overlay>
 
@@ -174,7 +173,23 @@ export default function App() {
           </Pane>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="Pemerintahan">
+        <LayersControl.Overlay name="Jakarta Utara">
+          <Pane name="Jakarta Utara" style={{ zIndex: 202 }}>
+            <GeoJSON
+              data={jakut}
+              style={batasKecStyle}
+              onEachFeature={onEachKec}
+            ></GeoJSON>
+          </Pane>
+        </LayersControl.Overlay>
+
+        <LayersControl.Overlay name="Area Rawan Banjir">
+          <Pane name="Area Rawan Banjir" style={{ zIndex: 203 }}>
+            <GeoJSON data={clip} style={banjirStyle}></GeoJSON>
+          </Pane>
+        </LayersControl.Overlay>
+
+        <LayersControl.Overlay name="Pemerintahan">
           <Pane name="Pemerintahan" style={{ zIndex: 601 }}>
             <GeoJSON
               data={pemerintahan}
@@ -190,23 +205,21 @@ export default function App() {
         </LayersControl.Overlay>
 
         <LayersControl.Overlay name="Pendidikan">
-          <LayerGroup>
-            <Pane name="Pendidikan" style={{ zIndex: 601 }}>
-              <GeoJSON
-                data={pendidikan}
-                onEachFeature={onEachPoint}
-                pointToLayer={(point, latlng) => {
-                  return L.marker(latlng, {
-                    icon: blueIcon,
-                  });
-                }}
-                style={{ color: "blue" }}
-              ></GeoJSON>
-            </Pane>
-          </LayerGroup>
+          <Pane name="Pendidikan" style={{ zIndex: 601 }}>
+            <GeoJSON
+              data={pendidikan}
+              onEachFeature={onEachPoint}
+              pointToLayer={(point, latlng) => {
+                return L.marker(latlng, {
+                  icon: blueIcon,
+                });
+              }}
+              style={{ color: "blue" }}
+            ></GeoJSON>
+          </Pane>
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="Rumah Sakit">
+        <LayersControl.Overlay name="Rumah Sakit">
           <Pane name="Rumah Sakit" style={{ zIndex: 601 }}>
             <GeoJSON
               data={rumahsakit}
@@ -218,19 +231,6 @@ export default function App() {
               }}
               style={{ color: "red" }}
             ></GeoJSON>
-          </Pane>
-        </LayersControl.Overlay>
-
-        <LayersControl.Overlay name="DEMNAS">
-          <Pane name="DEMNAS" style={{ zIndex: 200 }}>
-            <ImageOverlay
-              url={"./fitur/DEMNAS.png"}
-              bounds={[
-                [-6.25, 106.5],
-                [-6, 107],
-              ]}
-              opacity={0.8}
-            ></ImageOverlay>
           </Pane>
         </LayersControl.Overlay>
       </LayersControl>
